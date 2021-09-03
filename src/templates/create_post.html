@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
+
+{% block title %}
     <title>Blog create</title>
-</head>
-<body>
-    <h2>Welcome to {{type}} post page </h2>
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h2>Welcome to {{type}} post page </h2>
 
         <form method="POST">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit"> {{type}} Post </button>
+            <button type="submit" class="btn btn-success"> {{type}} Post </button>
         </form>
-
-</body>
-</html>
+    </div>
+{% endblock %}

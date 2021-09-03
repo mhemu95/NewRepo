@@ -6,14 +6,15 @@ from .forms import Postform
 def post_list(request):
     posts = Post.objects.all()
     context = {
-        'post_list':posts
+        'post_list' : posts
     }
     return render(request, 'post_list.html', context)
 
 def post_detail(request, id):
+    # In your detail template, you don't need a for loop; As you are just passing one post to the template:
     post = Post.objects.get(id=id)
     context = {
-        'post':post
+        'post': post
     }
     return render(request, 'post_detail.html', context)
 
@@ -43,3 +44,13 @@ def update_post(request, id):
         'type': 'Update' 
     }
     return render(request, 'create_post.html', context)
+
+def delete_post(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('post_list')
+    context = {
+        'post' : post
+    }
+    return render(request, 'delete_post.html', context)
