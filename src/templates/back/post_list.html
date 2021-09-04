@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Blog list
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center; color: aqua;">Welcome to posts list</h2>
+
+    <div style="text-align:center;">
+      <p> Create a Post <button> <a href=" {% url 'create_post' %} ">Create</a> </button> </p>
+    </div>
+
+    <div>
+      <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Blog posts</th>
+              <th scope="col">Created on</th>
+              <th scope="col">Action</th>
+              <th scope="col">Action</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for post in post_list %}
+              <tr>
+                  <td> {{post.title}} </td>
+                  <td> {{post.created_on}} </td>
+                  <td><a href="{% url 'post_detail' post.id %}">view</a></td>
+                  <td><a href="{% url 'update_post' post.id %}">update</a></td>
+                  <td><a href="{% url 'delete_post' post.id %}">delete</a></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+    
