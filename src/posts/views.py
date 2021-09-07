@@ -5,8 +5,9 @@ from .forms import Postform
 
 def home(request):
     blogs = Post.objects.all()
+    single = Post.objects.latest('created_on')
     context = {
-        'blogs' : blogs
+        'blogs' : blogs, 'single' : single
     }
     return render(request, 'front/home.html', context)
 

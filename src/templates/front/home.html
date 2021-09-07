@@ -10,7 +10,7 @@
     <div class="container">
         <div class="text-center my-5">
             <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-            <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+            <p class="lead mb-0">This is a test blog project. Hope you will like it.</p>
         </div>
     </div>
 </header>
@@ -19,17 +19,19 @@
 <div class="container">
     <div class="row">
         <!-- Blog entries-->
+        
         <div class="col-lg-8">
             <!-- Featured blog post-->
             <div class="card mb-4">
                 <a href="#!"><img class="card-img-top" src="{% static 'front/assets/img1.jpg' %}" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted">January 1, 2021</div>
-                    <h2 class="card-title">Featured Post Title</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
-                </div>
+                        <div class="small text-muted"> {{single.created_on}} </div>
+                        <h2 class="card-title"> {{single.title}} </h2>
+                        <p class="card-text"> {{single.content}} </p>
+                        <a class="btn btn-primary" href=" {% url 'post_detail' single.id %} ">Read more →</a>
+                    </div>
             </div>
+
             <!-- Nested row for non-featured blog posts-->
             <div class="row">
                 {% for blog in blogs %}
