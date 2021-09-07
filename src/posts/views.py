@@ -30,7 +30,7 @@ def post_detail(request, id):
 def create_post(request):
     form = Postform()
     if request.method == 'POST':
-        form = Postform(request.POST)
+        form = Postform(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('post_list')
@@ -44,7 +44,7 @@ def update_post(request, id):
     post = Post.objects.get(id=id)
     form = Postform(instance=post)
     if request.method == 'POST':
-        form = Postform(request.POST, instance=post)
+        form = Postform(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('post_list')

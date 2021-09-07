@@ -23,11 +23,13 @@
         <div class="col-lg-8">
             <!-- Featured blog post-->
             <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" src="{% static 'front/assets/img1.jpg' %}" alt="..." /></a>
+                <!--{% if single.post_img %}-->
+                <a href="{% url 'post_detail' single.id %}"><img class="card-img-top" src="{{ single.post_img.url }}" alt="{{single.title}}" style="height: 400px; width: 736px;" /></a>
+                <!--{% endif %}-->
                 <div class="card-body">
                         <div class="small text-muted"> {{single.created_on}} </div>
                         <h2 class="card-title"> {{single.title}} </h2>
-                        <p class="card-text"> {{single.content}} </p>
+                        <p class="card-text"> {{single.content | truncatewords:"10"}} </p>
                         <a class="btn btn-primary" href=" {% url 'post_detail' single.id %} ">Read more →</a>
                     </div>
             </div>
@@ -38,7 +40,9 @@
                 <div class="col-lg-6">
                     <!-- Blog post-->
                     <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="{% static 'front/assets/img2.png' %}" alt=" {{blog.title}} " /></a>
+                        <!--{% if blog.post_img %}-->
+                        <a href="{% url 'post_detail' blog.id %}"><img class="card-img-top" src="{{ blog.post_img.url }}" alt="{{blog.title}}" /></a>
+                        <!--{% endif %}-->
                         <div class="card-body">
                             <div class="small text-muted"> {{blog.created_on}} </div>
                             <h2 class="card-title h4"> {{blog.title |safe}} </h2>

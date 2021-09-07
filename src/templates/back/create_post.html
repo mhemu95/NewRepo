@@ -8,7 +8,7 @@
     <div style="text-align: center;">
         <h2>Welcome to {{type}} post page </h2>
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit" class="btn btn-success"> {{type}} Post </button>
