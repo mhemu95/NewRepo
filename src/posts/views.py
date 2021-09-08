@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import Postform
+from .filters import PostFilter
 
 
 def home(request):
     blogs = Post.objects.all()
     single = Post.objects.latest('created_on')
+    myFilter = PostFilter(request.GET, queryset=blogs)
+    blogs = myFilter.qs
+
     context = {
-        'blogs' : blogs, 'single' : single
+        'blogs' : blogs, 'single' : single, 'myFilter' : myFilter
     }
     return render(request, 'front/home.html', context)
+
 
 def post_list(request):
     posts = Post.objects.all()
@@ -17,6 +22,7 @@ def post_list(request):
         'post_list' : posts
     }
     return render(request, 'back/post_list.html', context)
+
 
 #CRUD starts here...
 def post_detail(request, id):
@@ -26,6 +32,7 @@ def post_detail(request, id):
         'post': post
     }
     return render(request, 'front/post_detail.html', context)
+
 
 def create_post(request):
     form = Postform()
@@ -40,6 +47,7 @@ def create_post(request):
     }
     return render(request, 'back/create_post.html', context)
 
+
 def update_post(request, id):
     post = Post.objects.get(id=id)
     form = Postform(instance=post)
@@ -53,6 +61,7 @@ def update_post(request, id):
         'type': 'Update' 
     }
     return render(request, 'back/create_post.html', context)
+
 
 def delete_post(request, id):
     post = Post.objects.get(id=id)
