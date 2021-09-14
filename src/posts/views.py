@@ -15,7 +15,7 @@ def home(request):
     }
     return render(request, 'front/home.html', context)
 
-
+# panel home
 def post_list(request):
     posts = Post.objects.all()
     context = {
@@ -72,3 +72,13 @@ def delete_post(request, id):
         'post' : post
     }
     return render(request, 'back/delete_post.html', context)
+
+
+def search(request):
+    q = request.GET['q']
+    find = Post.objects.filter(title__icontains=q)
+    #find = Post.objects.all()
+    context = {
+        'find': find
+    }
+    return render(request, 'search.html', context)

@@ -10,4 +10,6 @@ urlpatterns = [
     path('panel/create/', views.create_post, name='create_post'),
     path('panel/update/<id>/', views.update_post, name='update_post'),
     path('panel/delete/<id>/', views.delete_post, name='delete_post'),
+    #search url...
+    path('search/', views.search, name='post_search'),
 ]

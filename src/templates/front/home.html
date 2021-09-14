@@ -45,7 +45,7 @@
                         <!--{% endif %}-->
                         <div class="card-body">
                             <div class="small text-muted"> {{blog.created_on}} </div>
-                            <h2 class="card-title h4"> {{blog.title |safe}} </h2>
+                            <h2 class="card-title h4"> {{blog.title | truncatewords:"2"}} </h2>
                             <p class="card-text"> {{blog.content | truncatewords:"10"}} </p>
                             <a class="btn btn-primary" href=" {% url 'post_detail' blog.id %} ">Read more →</a>
                         </div>
@@ -78,9 +78,10 @@
                 <div class="card-body">
                     
                     <div class="form-group">
-                        <form method="GET">
-                            {{myFilter.form}}
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        <form method="get" action=" {% url 'post_search' %} ">
+                            {% csrf_token %}
+                            <input type="text" name="q" id="q" placeholder="search">
+                            <button class="btn btn-primary" type="submit">Go!</button>
                         </form>
                     </div>
 
